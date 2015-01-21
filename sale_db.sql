@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 21, 2015 at 05:38 AM
+-- Generation Time: Jan 21, 2015 at 07:10 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -491,7 +491,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_group_id`, `username`, `password`, `salt`, `firstname`, `lastname`, `email`, `image`, `code`, `ip`, `status`, `date_added`, `target`, `telephone`) VALUES
-(1, 1, 'admin', '6b64c3b708f86f457c9599b61339352c3b4fd89f', 'bbe7e4763', 'John', 'Doe', 'ducchinhbk@gmail.com', '', '', '::1', 1, '2015-01-15 10:16:08', 0, '0123456789'),
+(1, 1, 'admin', '6b64c3b708f86f457c9599b61339352c3b4fd89f', 'bbe7e4763', 'John', 'Doe', 'ducchinhbk@gmail.com', '', '', '192.168.10.195', 1, '2015-01-15 10:16:08', 0, '0123456789'),
 (2, 3, 'trangnguyen', 'e3187a5f13cc5460f269d414aab7f1450ea2aacf', '8a11e1eaf', 'Thùy Trang', 'Đỗ Nguyễn', 'trangdo@gmail.com', 'catalog/1-5285b.jpg', '', '::1', 1, '2015-01-16 10:11:06', 100000000, '0933456243'),
 (3, 3, 'longnguyen', '2f0fb285c1adf956f3703420d25b5ac27ba87f9d', 'e0bd0f19e', 'Hoàng Long', 'Nguyễn', 'longnguyen@gmail.com', 'catalog/George1-d85da-a581f.jpg', '', '::1', 1, '2015-01-16 10:12:21', 120000000, '09014253012'),
 (4, 3, 'phucnguyen', '0bbb48a5a3c7b2a1f3a326881f51e01267903d56', 'eba7a4d32', 'Xuân Phúc', 'Nguyễn Trần', 'xuanphuc@gmail.com', 'catalog/IMG_1766-170f1-0c0b0.JPG', '', '::1', 1, '2015-01-16 10:13:40', 100000000, '0954236540'),

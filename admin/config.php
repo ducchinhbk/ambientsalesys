@@ -1,11 +1,15 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/salesystem/admin/');
-define('HTTP_CATALOG', 'http://localhost/salesystem/');
+//define('HTTP_SERVER', 'http://localhost/salesystem/admin/');
+//define('HTTP_CATALOG', 'http://localhost/salesystem/');
+define('HTTP_SERVER', '/salesystem/admin/');
+define('HTTP_CATALOG', '/salesystem/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/salesystem/admin/');
-define('HTTPS_CATALOG', 'http://localhost/salesystem/');
+//define('HTTPS_SERVER', 'http://localhost/salesystem/admin/');
+//define('HTTPS_CATALOG', 'http://localhost/salesystem/');
+define('HTTPS_SERVER', '/salesystem/admin/');
+define('HTTPS_CATALOG', '/salesystem/');
 
 // DIR
 define('DIR_APPLICATION', 'E:\xampp\htdocs\salesystem/admin/');
