@@ -61,9 +61,17 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-booking-value">Booking value</label>
+                        <label class="col-sm-2 control-label" for="input-quickbook">Quickbook no</label>
                         <div class="col-sm-10">
-                          <input type="text" name="book_val" value="<?php echo $book_val; ?>" placeholder="Nhập số.." id="input-booking-value" class="form-control">
+                          <input type="text" name="quickbook" value="<?php echo $quickbook; ?>" placeholder="Ex: BT0006.." id="input-quickbook" class="form-control">
+                          
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-bookval">Booking value</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="show_book_val" value="<?php echo ($book_val)? number_format($book_val): 0; ?>" placeholder="Nhập số.." id="input-bookval" class="form-control">
+                          <input type="hidden" name="book_val" value="<?php echo $book_val; ?>" placeholder="Ex: BT0006.." id="hide-bookval">
                         </div>
                       </div>
                       <div class="form-group">
@@ -105,5 +113,33 @@ $('.time').datetimepicker({
 	pickDate: false
 });	
 //--></script>
+
+<script><!--
+function addCommas(nStr)
+{
+	nStr += '';
+	x = nStr.split('.');
+	x1 = x[0];
+	x2 = x.length > 1 ? '.' + x[1] : '';
+	var rgx = /(\d+)(\d{3})/;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	}
+	return x1 + x2;
+}
+
+$(document).ready(function(){
+  $("#input-bookval").focusout(function(){
+    var new_value = $(this).val().replace(/,/g , "");
+    new_value = addCommas($(this).val());
+    //alert(new_value);
+    $(this).val(new_value);
+    
+    var hideVal = new_value.replace(/,/g , "");
+    $("#hide-bookval").val(hideVal);
+  });
+});
+//--></script>
+
 </div>
 <?php echo $footer; ?>

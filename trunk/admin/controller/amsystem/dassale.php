@@ -72,7 +72,7 @@ class ControllerAmsystemDassale extends Controller {
 			$data['bookings'][]  = array(
 				'booking_id'     => $result['booking_id'],
 				'client'         => $result['client'],
-                'book_no'        => '00'.$data['user_id'].'-'.$result['booking_id'],
+                'book_no'        => $result['quickbook'],
 				'startdate'      => date('d-m-Y', strtotime($result['startdate'])),
                 'enddate'        => date('d-m-Y', strtotime($result['enddate'])),
                 'book_val'       => $result['book_val'],

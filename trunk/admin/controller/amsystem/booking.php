@@ -177,7 +177,7 @@ class ControllerAmsystemBooking extends Controller {
 			$data['bookings'][]  = array(
 				'booking_id'     => $result['booking_id'],
 				'client'         => $result['client'],
-                'book_no'        => '00'.$data['user_id'].'-'.$result['booking_id'],
+                'quickbook'        => $result['quickbook'],
 				'startdate'      => date('d-m-Y', strtotime($result['startdate'])),
                 'enddate'        => date('d-m-Y', strtotime($result['enddate'])),
                 'book_val'       => $result['book_val'],
@@ -277,7 +277,15 @@ class ControllerAmsystemBooking extends Controller {
 		} else {
 			$data['enddate'] = '';
 		}
-
+        
+        if (isset($this->request->post['quickbook'])) {
+			$data['quickbook'] = $this->request->post['quickbook'];
+		} elseif (!empty($booking_info)) {
+			$data['quickbook'] = $booking_info['quickbook'];
+		} else {
+			$data['quickbook'] = '';
+		}
+        
 		if (isset($this->request->post['book_val'])) {
 			$data['book_val'] = $this->request->post['book_val'];
 		} elseif (!empty($booking_info)) {
