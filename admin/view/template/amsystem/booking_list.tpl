@@ -57,7 +57,7 @@
                     <?php } ?></td>
                       
                       <td class="text-left"><?php echo $row['client']?></td>
-                      <td class="text-left"><?php echo $row['book_no']?></td>
+                      <td class="text-left"><?php echo $row['quickbook']?></td>
                       <td class="text-left"><?php echo $row['startdate']?></td>
                       <td class="text-left"><?php echo $row['enddate']?></td>
                       <td class="text-left"><?php echo number_format($row['book_val']); ?></td>

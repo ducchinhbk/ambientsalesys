@@ -2,7 +2,7 @@
 class ModelAmsystemBooking extends Model {
 	public function addBooking($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "ams_booking SET  client = '" . $this->db->escape($data['client']) . "', startdate = '" . $this->db->escape($data['startdate']) . "', enddate = '" . $this->db->escape($data['enddate']) . "', 
-                                    book_val = '" . $this->db->escape($data['book_val']) . "', status = '" . $this->db->escape($data['status']) . "', note = '" . (int)$data['note'] . "',  date_added = NOW(), user_id = '" . (int)$data['user_id'] . "' ");
+                                    quickbook = '" . $this->db->escape($data['quickbook']) . "', book_val = '" . $this->db->escape($data['book_val']) . "', status = '" . $this->db->escape($data['status']) . "', note = '" . (int)$data['note'] . "',  date_added = NOW(), user_id = '" . (int)$data['user_id'] . "' ");
 
 		$booking_id = $this->db->getLastId();
 
@@ -16,7 +16,8 @@ class ModelAmsystemBooking extends Model {
     
 	public function editBooking($booking_id, $data) {
 		$this->db->query("UPDATE ams_booking SET  client = '" . $this->db->escape($data['client']) . "', startdate = '" . $this->db->escape($data['startdate']) . "', enddate = '" . $this->db->escape($data['enddate']) . "', 
-                                                book_val = '" . $this->db->escape($data['book_val']) . "', status = '" . $this->db->escape($data['status']) . "', note = '" . (int)$data['note'] . "' WHERE booking_id = '" . (int)$booking_id . "'");
+                                                quickbook = '" . $this->db->escape($data['quickbook']) . "', book_val = '" . $this->db->escape($data['book_val']) . "', status = '" . $this->db->escape($data['status']) . "', note = '" . (int)$data['note'] . "' 
+                            WHERE booking_id = '" . (int)$booking_id . "'");
 
 	}
     public function deleteBooking($booking_id) {
