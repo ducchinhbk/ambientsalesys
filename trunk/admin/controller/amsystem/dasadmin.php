@@ -18,7 +18,14 @@ class ControllerAmsystemDasadmin extends Controller {
 			$data['selected'] = array();
 		}
         
+        $current_year = date("Y");
+        $from_date = date("Y").'-01-01';
+        $to_date = date('Y-m-d');
         
+        $now = new DateTime($from_date);
+        $ref = new DateTime($to_date);
+        $diff = $now->diff($ref);
+        $sumdate =  $diff->d + 1; 
         
         $this->load->model('tool/image');
         $this->load->model('amsystem/dashboard');
@@ -44,13 +51,15 @@ class ControllerAmsystemDasadmin extends Controller {
                 'email'        => $result['email'],
                 'groupname'       => $result['groupname'],
                 'delivery'         => $result['delivery'],
-                'percent'           => round($result['delivery']/$result['target']*100),
+                'percent'           => round($result['delivery']/$result['target']*100, 2),
+                'now_percent'       => round(($result['target']/365*$sumdate)/$result['target']*100, 2),
                 'view'           => $this->url->link('amsystem/booking', 'token=' . $this->session->data['token'] . '&user_id=' . $result['user_id'], 'SSL')
 			);
             $data['total_target'] = $data['total_target'] + $result['target'];
             $data['total_delivery'] = $data['total_delivery'] + $result['delivery'];
 		}
-		$data['total_percent'] = round($data['total_delivery']/$data['total_target']*100);
+		$data['total_percent'] = round($data['total_delivery']/$data['total_target']*100, 2);
+        $data['total_now_percent'] = round(($data['total_target']/365*$sumdate)/$data['total_target']*100, 2);
         
         
 		return $this->load->view('amsystem/dasadmin.tpl', $data);	

@@ -1,11 +1,11 @@
 <?php
 class ModelAmsystemUser extends Model {
 	public function addUser($data) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "user` SET username = '" . $this->db->escape($data['username']) . "', target = '" . $this->db->escape($data['target']) . "', user_group_id = '" . (int)$data['user_group_id'] . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', image = '" . $this->db->escape($data['image']) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "user` SET username = '" . $this->db->escape($data['username']) . "', target = '" . $this->db->escape($data['target']) . "', user_group_id = '" . (int)$data['user_group_id'] . "', admin_group_id = '" . (int)$data['admin_group_id'] . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', image = '" . $this->db->escape($data['image']) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
 	}
 
 	public function editUser($user_id, $data) {
-		$this->db->query("UPDATE `" . DB_PREFIX . "user` SET username = '" . $this->db->escape($data['username']) . "', target = '" . $this->db->escape($data['target']) . "', user_group_id = '" . (int)$data['user_group_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', image = '" . $this->db->escape($data['image']) . "', status = '" . (int)$data['status'] . "' WHERE user_id = '" . (int)$user_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "user` SET username = '" . $this->db->escape($data['username']) . "', target = '" . $this->db->escape($data['target']) . "', user_group_id = '" . (int)$data['user_group_id'] . "', admin_group_id = '" . (int)$data['admin_group_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', image = '" . $this->db->escape($data['image']) . "', status = '" . (int)$data['status'] . "' WHERE user_id = '" . (int)$user_id . "'");
 
 		if ($data['password']) {
 			$this->db->query("UPDATE `" . DB_PREFIX . "user` SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE user_id = '" . (int)$user_id . "'");
@@ -53,7 +53,8 @@ class ModelAmsystemUser extends Model {
 	}
     
 	public function getUsers($data = array()) {
-		$sql = "SELECT u.*, ug.name AS groupname FROM `user` u LEFT JOIN user_group ug ON u.`user_group_id` = ug.`user_group_id`";
+		$sql = "SELECT u.*, ug.name AS groupname, (SELECT `name`  FROM user_group WHERE user_group_id = u.`admin_group_id`) AS admin_group
+                FROM `user` u LEFT JOIN user_group ug ON u.`user_group_id` = ug.`user_group_id`";
 
 		$sort_data = array(
 			'username',
@@ -95,7 +96,11 @@ class ModelAmsystemUser extends Model {
 
 		return $query->row['total'];
 	}
+    public function getAdminGroup($user_id){
+        $query = $this->db->query("SELECT admin_group_id  FROM `user` WHERE user_id = ".$user_id."");
 
+		return $query->row['admin_group_id'];
+    }
 	public function getTotalUsersByGroupId($user_group_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "user` WHERE user_group_id = '" . (int)$user_group_id . "'");
 

@@ -4,15 +4,15 @@
             <div class="tile">
               <div class="tile-heading">Total Target </div>
               <div class="tile-body"><i class="fa fa-shopping-cart"></i>
-                <h2 class="pull-right"><?php echo number_format($total_target); ?></h2>
+                <h2 class="pull-right"><?php echo number_format($target); ?></h2>
               </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6">
               <div class="tile">
-                  <div class="tile-heading">Total Delivery <span class="pull-right"><?php  echo $total_percent; ?>% </span></div>
+                  <div class="tile-heading">Total Delivery <span class="pull-right"><?php echo $percent; ?>% </span></div>
                   <div class="tile-body"><i class="fa fa-credit-card"></i>
-                    <h2 class="pull-right"><?php echo number_format($total_delivery); ?></h2>
+                    <h2 class="pull-right"><?php echo number_format($delivery); ?></h2>
                   </div>
             </div>
         </div>
@@ -20,106 +20,80 @@
               <div class="tile">
                   <div class="tile-heading">Today percentage <span class="pull-right"></span></div>
                   <div class="tile-body"><i class="fa fa-eye"></i>
-                    <h2 class="pull-right"><?php echo $total_now_percent; ?>%</h2>
+                    <h2 class="pull-right"><?php echo $now_percent; ?>%</h2>
                   </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
             <div class="tile">
-              <div class="tile-heading">Total Members </div>
+              <div class="tile-heading">Active campaigns </div>
               <div class="tile-body"><i class="fa fa-user"></i>
-                <h2 class="pull-right"><?php echo $total_member; ?></h2>
+                <h2 class="pull-right"><?php echo $activeCampaign; ?></h2>
               </div>
             </div>
          </div>
     </div>
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+  <br />
+    <br />
+    <br />
+    <br />
+      
+  <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12"> 
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-calendar"></i> <i class="caret"></i></a>
-              <ul id="range" class="dropdown-menu dropdown-menu-right">
-                <li><a href="day">Today</a></li>
-                <li><a href="week">Week</a></li>
-                <li class="active"><a href="month">Month</a></li>
-                <li><a href="year">Year</a></li>
-              </ul>
-            </div>
-            <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Sales Analytics</h3>
+            <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Your Payment history</h3>
           </div>
-          <div class="panel-body">
-            <div id="chart-sale" style="width: 100%; height: 260px;"></div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td style="width: 1px;" class="text-center">
+                  <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"></td>
+                  <td class="text-center">Agency</td>
+                  <td class="text-center">Client</td>
+                  <td class="text-center">Quick book no.</td>
+                  <td class="text-center">Start date</td>
+                  <td class="text-center">End date</td>
+                  <td class="text-center">Booking value</td>
+                  <td class="text-center">Status</td>
+                  <td class="text-center">Note</td>
+                  <td class="text-right">Action</td>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach( $bookings as $row ){?>
+                    <tr>
+                    <td class="text-center"><?php if (in_array($row['booking_id'], $selected)) { ?>
+                    <input type="checkbox" name="selected[]" value="<?php echo $row['booking_id']; ?>" checked="checked" />
+                    <?php } else { ?>
+                    <input type="checkbox" name="selected[]" value="<?php echo $row['booking_id']; ?>" />
+                    <?php } ?></td>
+                      <td class="text-left"><?php echo $row['agency']?></td>
+                      <td class="text-left"><?php echo $row['client']?></td>
+                      <td class="text-left"><?php echo $row['book_no']?></td>
+                      <td class="text-left"><?php echo $row['startdate']?></td>
+                      <td class="text-left"><?php echo $row['enddate']?></td>
+                      <td class="text-left"><?php echo number_format($row['book_val']); ?></td>
+                      <td class="text-left <?php echo ' '.$row['class']?>"><?php echo $row['status']?></td>
+                      <td class="text-left"><?php echo $row['note']?></td>
+                      <td class="text-right">
+                        <a href="<?php echo $row['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                      </td>
+                    </tr>
+                <?php }?>
+                 
+              </tbody>
+            </table>
           </div>
         </div>
-        <script type="text/javascript" src="view/javascript/jquery/flot/jquery.flot.js"></script> 
-        <script type="text/javascript" src="view/javascript/jquery/flot/jquery.flot.resize.min.js"></script>
-        <script type="text/javascript"><!--
-        $('#range a').on('click', function(e) {
-        	e.preventDefault();
-        	
-        	$(this).parent().parent().find('li').removeClass('active');
-        	
-        	$(this).parent().addClass('active');
-        	
-        	$.ajax({
-        		type: 'get',
-        		url: 'index.php?route=dashboard/chart/chart&token=a7f5eac33d9a72051d987a1f22bdb1ee&range=' + $(this).attr('href'),
-        		dataType: 'json',
-        		success: function(json) {
-                                if (typeof json['order'] == 'undefined') { return false; }
-        			var option = {	
-        				shadowSize: 0,
-        				colors: ['#9FD5F1', '#1065D2'],
-        				bars: { 
-        					show: true,
-        					fill: true,
-        					lineWidth: 1
-        				},
-        				grid: {
-        					backgroundColor: '#FFFFFF',
-        					hoverable: true
-        				},
-        				points: {
-        					show: false
-        				},
-        				xaxis: {
-        					show: true,
-                    		ticks: json['xaxis']
-        				}
-        			}
-        			
-        			$.plot('#chart-sale', [json['order'], json['customer']], option);	
-        					
-        			$('#chart-sale').bind('plothover', function(event, pos, item) {
-        				$('.tooltip').remove();
-        			  
-        				if (item) {
-        					$('<div id="tooltip" class="tooltip top in"><div class="tooltip-arrow"></div><div class="tooltip-inner">' + item.datapoint[1].toFixed(2) + '</div></div>').prependTo('body');
-        					
-        					$('#tooltip').css({
-        						position: 'absolute',
-        						left: item.pageX - ($('#tooltip').outerWidth() / 2),
-        						top: item.pageY - $('#tooltip').outerHeight(),
-        						pointer: 'cusror'
-        					}).fadeIn('slow');	
-        					
-        					$('#chart-sale').css('cursor', 'pointer');		
-        			  	} else {
-        					$('#chart-sale').css('cursor', 'auto');
-        				}
-        			});
-        		},
-                error: function(xhr, ajaxOptions, thrownError) {
-                   //alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-        	});
-        });
-        
-        $('#range .active a').trigger('click');
-        //--></script> 
+      </div>
     </div>
-  </div>
-  <div class="row">
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="row">
       
       <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12"> 
         <div class="panel panel-default">
