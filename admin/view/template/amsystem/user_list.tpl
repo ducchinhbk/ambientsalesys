@@ -50,6 +50,7 @@
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
                     <?php } ?></td>
                   <td class="text-left">Telephone</td>
+                  <td class="text-left">Admin group</td>
                   <td class="text-right"><?php echo $column_action; ?></td>
                 </tr>
               </thead>
@@ -64,11 +65,12 @@
                     <?php } ?></td>
                   <td class="text-left"><img src="<?php echo $user['image']; ?>" alt="avatar"/></td>
                   <td class="text-left"><?php echo $user['fullname']; ?></td>
-                   <td class="text-left"><?php echo $user['target']; ?></td>
+                   <td class="text-left text-danger"><?php echo number_format($user['target']); ?></td>
                   <td class="text-left"><?php echo $user['username']; ?></td>
                   <td class="text-left"><?php echo $user['groupname']; ?></td>
                   <td class="text-left"><?php echo $user['status']; ?></td>
                   <td class="text-left"><?php echo $user['telephone']; ?></td>
+                  <td class="text-left"><?php echo $user['admin_group']; ?></td>
                   <td class="text-right"><a href="<?php echo $user['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 <?php } ?>

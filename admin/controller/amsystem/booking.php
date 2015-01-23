@@ -56,7 +56,7 @@ class ControllerAmsystemBooking extends Controller {
 	public function delete() {
 		$this->load->language('sale/customer');
 
-		$this->document->setTitle($this->language->get('heading_title'));
+		$this->document->setTitle('You dont have permission for this action!');
 
 		$this->load->model('amsystem/booking');
 
@@ -65,7 +65,7 @@ class ControllerAmsystemBooking extends Controller {
 				$this->model_amsystem_booking->deleteBooking($booking_id);
 			}
 
-			$this->session->data['success'] = $this->language->get('text_success');
+			$this->session->data['success'] = 'Delete succesfull!';
 
 			$url = '';
 
@@ -176,6 +176,7 @@ class ControllerAmsystemBooking extends Controller {
                 $result['note'] = '';
 			$data['bookings'][]  = array(
 				'booking_id'     => $result['booking_id'],
+                'agency'         => $result['agency'],
 				'client'         => $result['client'],
                 'quickbook'        => $result['quickbook'],
 				'startdate'      => date('d-m-Y', strtotime($result['startdate'])),
@@ -252,6 +253,14 @@ class ControllerAmsystemBooking extends Controller {
 
 		if (isset($this->request->get['booking_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$booking_info = $this->model_amsystem_booking->getBooking($this->request->get['booking_id']);
+		}
+        
+        if (isset($this->request->post['agency'])) {
+			$data['agency'] = $this->request->post['agency'];
+		} elseif (!empty($booking_info)) {
+			$data['agency'] = $booking_info['agency'];
+		} else {
+			$data['agency'] = '';
 		}
 
 		if (isset($this->request->post['client'])) {
@@ -333,8 +342,8 @@ class ControllerAmsystemBooking extends Controller {
 	}
 
 	protected function validateDelete() {
-		if (!$this->user->hasPermission('modify', 'sale/customer')) {
-			$this->error['warning'] = $this->language->get('error_permission');
+		if (!$this->user->hasPermission('modify', 'amsystem/booking')) {
+			$this->error['warning'] = 'You do not have permission for this action!';
 		}
 
 		return !$this->error;

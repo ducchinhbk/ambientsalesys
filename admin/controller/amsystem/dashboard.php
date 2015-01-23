@@ -28,6 +28,7 @@ class ControllerAmsystemDashboard extends Controller {
         $this->load->model('amsystem/user');
         $result = $this->model_amsystem_user->getUsergroupByUserID($user_id);
         
+        $admin_group = $this->model_amsystem_user->getAdminGroup($user_id);
         
 		$data['token'] = $this->session->data['token'];
 
@@ -37,6 +38,9 @@ class ControllerAmsystemDashboard extends Controller {
         if($result['user_group_id'] == 1){
             $data['content'] = $this->load->controller('amsystem/dasadmin');
            
+        }
+        else if($admin_group != 0){
+            $data['content'] = $this->load->controller('amsystem/dasadgroup');
         }
         else{
             $data['content'] = $this->load->controller('amsystem/dassale');

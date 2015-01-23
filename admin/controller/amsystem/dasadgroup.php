@@ -1,5 +1,5 @@
 <?php
-class ControllerAmsystemDassale extends Controller {
+class ControllerAmsystemDasadgroup extends Controller {
 	public function index() {
 		$this->load->language('amsystem/dasadmin');
 
@@ -12,8 +12,9 @@ class ControllerAmsystemDassale extends Controller {
 		$data['text_activity'] = $this->language->get('text_activity');
 		$data['text_recent'] = $this->language->get('text_recent');
         $data['button_edit'] = $this->language->get('button_edit');
-		
+		$data['breadcrumbs'] = array();
 
+		
 		
         if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
@@ -32,10 +33,45 @@ class ControllerAmsystemDassale extends Controller {
         $now = new DateTime($from_date);
         $ref = new DateTime($to_date);
         $diff = $now->diff($ref);
-        $sumdate =  $diff->d + 1; 
+        $sumdate =  $diff->d + 1;
+        
+        $this->load->model('amsystem/user');
+        $admin_group = $this->model_amsystem_user->getAdminGroup($data['user_id']);
+        
+        $this->load->model('tool/image');
+        $this->load->model('amsystem/dashboard');
+      
+        $data['users'] = array();
+        $results = $this->model_amsystem_dashboard->get_group_team_members($admin_group);
+        $data['total_member'] = count($results);
+        
+		foreach ($results as $result) {
+ 	        if ($result['image'] && is_file(DIR_IMAGE . $result['image'])) {
+    			$data['thumb'] = $this->model_tool_image->resize($result['image'], 50, 50);
+    		} else {
+    			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 50, 50);
+    		}
+            
+                
+			$data['users'][]  = array(
+				'user_id'     => $result['user_id'],
+				'image'         => $data['thumb'],
+                'fullname'        => $result['fullname'],
+				'target'        => $result['target'],
+                'email'        => $result['email'],
+                'groupname'       => $result['groupname'],
+                'delivery'         => $result['delivery'],
+                'percent'           => round($result['delivery']/$result['target']*100, 2),
+                'now_percent'       => round(($result['target']/365*$sumdate)/$result['target']*100, 2),
+                'view'           => $this->url->link('amsystem/booking', 'token=' . $this->session->data['token'] . '&user_id=' . $result['user_id'], 'SSL')
+			);
+            
+		}
+        
+        
         
         //get target
-        $this->load->model('amsystem/user');
+        
         $target = $this->model_amsystem_user->getTarget($data['user_id']);
         $data['target'] = $target;
         $data['delivery'] = 0;
@@ -93,6 +129,8 @@ class ControllerAmsystemDassale extends Controller {
         $data['percent'] = round($data['delivery']/$data['target']*100, 2);
         $data['now_percent'] = round(($target/365*$sumdate)/$target*100, 2);
        
-		return $this->load->view('amsystem/dassale.tpl', $data);
+       
+       
+		return $this->load->view('amsystem/dasadgroup.tpl', $data);
 	}
 }

@@ -32,6 +32,12 @@
                 <div class="col-sm-10">
                   <div class="tab-content">
                     <div class="tab-pane active" id="tab-data">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-agency">Agency</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="agency" value="<?php echo $agency; ?>" placeholder="Agency.." id="input-agency" class="form-control">
+                        </div>
+                      </div>
                       <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-client">Client</label>
                         <div class="col-sm-10">

@@ -188,6 +188,7 @@ class ControllerAmsystemUser extends Controller {
 				'username'   => $result['username'],
                 'fullname'  => $result['lastname'].' '.$result['firstname'],
                 'groupname'   => $result['groupname'],
+                'admin_group'   => $result['admin_group'],
                 'telephone'   => $result['telephone'],
                 'image'      => $data['thumb'],
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
@@ -390,6 +391,15 @@ class ControllerAmsystemUser extends Controller {
 		} else {
 			$data['user_group_id'] = '';
 		}
+        
+        if (isset($this->request->post['admin_group_id'])) {
+			$data['admin_group_id'] = $this->request->post['admin_group_id'];
+		} elseif (!empty($user_info)) {
+			$data['admin_group_id'] = $user_info['admin_group_id'];
+		} else {
+			$data['admin_group_id'] = '';
+		}
+        
         if (isset($this->request->post['target'])) {
 			$data['target'] = $this->request->post['target'];
 		} elseif (!empty($user_info)) {

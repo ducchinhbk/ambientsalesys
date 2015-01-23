@@ -48,6 +48,13 @@
               </select>
             </div>
           </div>
+          <div class="form-group" style="display: none;" id="admin-group">
+            <label class="col-sm-2 control-label" for="input-admin-group">Admin group</label>
+            <div class="col-sm-10">
+              <input type="checkbox" name="admin_group_id" value="<?php echo $admin_group_id; ?>" id="input-admin-group" class="form-control" <?php echo ($admin_group_id != 0)? 'checked': ''; ?> style="margin: 10px;"/>
+              
+            </div>
+          </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-target">Target</label>
             <div class="col-sm-10">
@@ -130,4 +137,50 @@
     </div>
   </div>
 </div>
+<script>
+    $(document).ready(function(){
+       
+        
+        var user_group = $( "#input-user-group" ).val();
+        if(user_group != 1){
+            $('#admin-group').show();
+            $('#input-admin-group').click(function(){
+                if ($(this).is(':checked')) {
+                    $('#input-admin-group').val(user_group);
+                }
+                else{
+                    $('#input-admin-group').val(0);
+                }
+                    
+            });
+        }
+        else{
+            $('#admin-group').hide();
+            $('#input-admin-group').val(0);
+        }
+        
+        $( "#input-user-group" ).change(function(){
+            var user_group = $("#input-user-group").val();
+            if(user_group != 1){
+                $('#admin-group').show();
+                
+                $('#input-admin-group').click(function(){
+                    if ($(this).is(':checked')) {
+                         $('#input-admin-group').val(user_group);
+                    }
+                    else{
+                        $('#input-admin-group').val(0);
+                    }
+                    
+                });
+            }
+            else{
+                
+                $('#admin-group').hide();
+                $('#input-admin-group').val(0);
+                $('#input-admin-group').prop('checked', false);
+            }
+        });
+    });
+</script>
 <?php echo $footer; ?> 

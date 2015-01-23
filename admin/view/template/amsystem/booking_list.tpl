@@ -37,7 +37,8 @@
                 
                 <tr>
                   <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                  <td class="text-left">Clients</td>
+                  <td class="text-left">Agency</td>
+                  <td class="text-left">Client</td>
                   <td class="text-left">Quickbook no</td>
                   <td class="text-left">Startdate</td>
                   <td class="text-left">End date</td>
@@ -56,6 +57,7 @@
                     <input type="checkbox" name="selected[]" value="<?php echo $row['booking_id']; ?>" />
                     <?php } ?></td>
                       
+                      <td class="text-left"><?php echo $row['agency']?></td>
                       <td class="text-left"><?php echo $row['client']?></td>
                       <td class="text-left"><?php echo $row['quickbook']?></td>
                       <td class="text-left"><?php echo $row['startdate']?></td>
