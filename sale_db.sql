@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 23, 2015 at 07:52 AM
+-- Generation Time: Mar 16, 2015 at 08:31 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -517,7 +517,7 @@ CREATE TABLE IF NOT EXISTS `user_group` (
 --
 
 INSERT INTO `user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Administrator', 'a:2:{s:6:"access";a:20:{i:0;s:16:"amsystem/booking";i:1;s:17:"amsystem/dasadmin";i:2;s:22:"amsystem/dasadmingroup";i:3;s:18:"amsystem/dashboard";i:4;s:16:"amsystem/dassale";i:5;s:13:"amsystem/user";i:6;s:24:"amsystem/user_permission";i:7;s:18:"common/column_left";i:8;s:18:"common/filemanager";i:9;s:11:"common/menu";i:10;s:14:"common/profile";i:11;s:12:"common/stats";i:12;s:16:"feed/google_base";i:13;s:19:"feed/google_sitemap";i:14;s:15:"feed/openbaypro";i:15;s:15:"setting/setting";i:16;s:13:"setting/store";i:17;s:8:"user/api";i:18;s:9:"user/user";i:19;s:20:"user/user_permission";}s:6:"modify";a:20:{i:0;s:16:"amsystem/booking";i:1;s:17:"amsystem/dasadmin";i:2;s:22:"amsystem/dasadmingroup";i:3;s:18:"amsystem/dashboard";i:4;s:16:"amsystem/dassale";i:5;s:13:"amsystem/user";i:6;s:24:"amsystem/user_permission";i:7;s:18:"common/column_left";i:8;s:18:"common/filemanager";i:9;s:11:"common/menu";i:10;s:14:"common/profile";i:11;s:12:"common/stats";i:12;s:16:"feed/google_base";i:13;s:19:"feed/google_sitemap";i:14;s:15:"feed/openbaypro";i:15;s:15:"setting/setting";i:16;s:13:"setting/store";i:17;s:8:"user/api";i:18;s:9:"user/user";i:19;s:20:"user/user_permission";}}'),
+(1, 'Administrator', 'a:2:{s:6:"access";a:21:{i:0;s:16:"amsystem/booking";i:1;s:19:"amsystem/dasadgroup";i:2;s:17:"amsystem/dasadmin";i:3;s:18:"amsystem/dashboard";i:4;s:16:"amsystem/dassale";i:5;s:23:"amsystem/largestbooking";i:6;s:13:"amsystem/user";i:7;s:24:"amsystem/user_permission";i:8;s:18:"common/column_left";i:9;s:18:"common/filemanager";i:10;s:11:"common/menu";i:11;s:14:"common/profile";i:12;s:12:"common/stats";i:13;s:16:"feed/google_base";i:14;s:19:"feed/google_sitemap";i:15;s:15:"feed/openbaypro";i:16;s:15:"setting/setting";i:17;s:13:"setting/store";i:18;s:8:"user/api";i:19;s:9:"user/user";i:20;s:20:"user/user_permission";}s:6:"modify";a:21:{i:0;s:16:"amsystem/booking";i:1;s:19:"amsystem/dasadgroup";i:2;s:17:"amsystem/dasadmin";i:3;s:18:"amsystem/dashboard";i:4;s:16:"amsystem/dassale";i:5;s:23:"amsystem/largestbooking";i:6;s:13:"amsystem/user";i:7;s:24:"amsystem/user_permission";i:8;s:18:"common/column_left";i:9;s:18:"common/filemanager";i:10;s:11:"common/menu";i:11;s:14:"common/profile";i:12;s:12:"common/stats";i:13;s:16:"feed/google_base";i:14;s:19:"feed/google_sitemap";i:15;s:15:"feed/openbaypro";i:16;s:15:"setting/setting";i:17;s:13:"setting/store";i:18;s:8:"user/api";i:19;s:9:"user/user";i:20;s:20:"user/user_permission";}}'),
 (3, 'Sale 1', 'a:2:{s:6:"access";a:3:{i:0;s:16:"amsystem/booking";i:1;s:19:"amsystem/dasadgroup";i:2;s:18:"amsystem/dashboard";}s:6:"modify";a:3:{i:0;s:16:"amsystem/booking";i:1;s:19:"amsystem/dasadgroup";i:2;s:18:"amsystem/dashboard";}}'),
 (14, 'Sale 2', 'a:2:{s:6:"access";a:6:{i:0;s:16:"amsystem/booking";i:1;s:19:"amsystem/dasadgroup";i:2;s:18:"amsystem/dashboard";i:3;s:18:"common/column_left";i:4;s:18:"common/filemanager";i:5;s:11:"common/menu";}s:6:"modify";a:4:{i:0;s:16:"amsystem/booking";i:1;s:19:"amsystem/dasadgroup";i:2;s:18:"amsystem/dashboard";i:3;s:18:"common/column_left";}}');
 
