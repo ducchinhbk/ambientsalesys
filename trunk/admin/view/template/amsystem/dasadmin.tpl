@@ -120,11 +120,39 @@
     </div>
   </div>
   <div class="row">
-      
+      <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12">
+          <form action="<?php echo $viewlargestbooking; ?>" method="post" id="viewlargestbook">
+              <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-start-date" style="margin: 10px -118px 12px 23px;">Start date</label>
+                  <div class="col-sm-2">
+                      <div class="input-group date">
+                          <input type="text" name="startdate" value="" placeholder="State Date" data-date-format="YYYY-MM-DD" id="input-start-date" class="form-control">
+                          <span class="input-group-btn">
+                          <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                          </span>
+                       </div>
+                   </div>
+                   <label class="col-sm-2 control-label" for="input-end-date" style="margin: 10px -118px 12px 23px;">End Date</label>
+                   <div class="col-sm-2">
+                       <div class="input-group date">
+                            <input type="text" name="enddate" value="" placeholder="End Date" data-date-format="YYYY-MM-DD" id="input-end-date" class="form-control">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                            </span>
+                       </div>
+                   </div>
+                   <div class="col-sm-2">
+                        <button type="submit" form="form-customer" data-toggle="tooltip" title="View Largest booking" class="btn btn-primary" onclick="viewlargestbook()"><i class="fa fa-search"></i>View Largest booking</button>
+                   </div>
+                   
+              </div>
+           </form>
+      </div>
       <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12"> 
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Team members</h3>
+            
           </div>
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -173,3 +201,27 @@
       </div>
     </div>
   </div>
+  
+<script type="text/javascript"><!--
+    $('.date').datetimepicker({
+    	pickTime: false
+    });
+    
+    $('.datetime').datetimepicker({
+    	pickDate: true,
+    	pickTime: true
+    });
+    
+    $('.time').datetimepicker({
+    	pickDate: false
+    });	
+//--></script>
+
+<script type="text/javascript"><!--
+   function viewlargestbook()
+   {
+        $('#viewlargestbook').submit();
+    
+   }
+  
+//--></script>
