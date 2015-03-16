@@ -20,12 +20,10 @@ class ControllerAmsystemDasadmin extends Controller {
         
         $current_year = date("Y");
         $from_date = date("Y").'-01-01';
-        $to_date = date('Y-m-d');
-        
-        $now = new DateTime($from_date);
-        $ref = new DateTime($to_date);
-        $diff = $now->diff($ref);
-        $sumdate =  $diff->d + 1; 
+        $now = time(); // or your date as well
+        $your_date = strtotime($from_date);
+        $datediff = abs($now - $your_date);
+        $sumdate = floor($datediff/(60*60*24)) +1;
         
         $this->load->model('tool/image');
         $this->load->model('amsystem/dashboard');
@@ -34,8 +32,10 @@ class ControllerAmsystemDasadmin extends Controller {
         $data['users'] = array();
         $results = $this->model_amsystem_dashboard->get_team_members();
         $data['total_member'] = count($results);
-        
-		foreach ($results as $result) {
+        $data['viewlargestbooking']  = $this->url->link('amsystem/largestbooking', 'token=' . $this->session->data['token'], 'SSL');
+	
+    
+    	foreach ($results as $result) {
  	        if ($result['image'] && is_file(DIR_IMAGE . $result['image'])) {
     			$data['thumb'] = $this->model_tool_image->resize($result['image'], 50, 50);
     		} else {

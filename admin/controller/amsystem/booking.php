@@ -23,7 +23,7 @@ class ControllerAmsystemBooking extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_amsystem_booking->addbooking($this->request->post);
 
-			$this->session->data['success'] = $this->language->get('text_success');
+			$this->session->data['success'] = "Add succesfull";
 
 
 			$this->response->redirect($this->url->link('amsystem/booking', 'token=' . $this->session->data['token'], 'SSL'));
@@ -43,7 +43,7 @@ class ControllerAmsystemBooking extends Controller {
 		  
 			$this->model_amsystem_booking->editBooking($this->request->get['booking_id'], $this->request->post);
 
-			$this->session->data['success'] = $this->language->get('text_success');
+			$this->session->data['success'] = "Edit succesfull";
 
 			$url = '';
 
@@ -172,8 +172,6 @@ class ControllerAmsystemBooking extends Controller {
             }
             else;
             
-            if($result['note']== 0)
-                $result['note'] = '';
 			$data['bookings'][]  = array(
 				'booking_id'     => $result['booking_id'],
                 'agency'         => $result['agency'],
