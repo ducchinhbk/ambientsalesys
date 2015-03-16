@@ -24,5 +24,5 @@ define('DB_DRIVER', 'mysqli');
 define('DB_HOSTNAME', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_DATABASE', 'amsystem');
+define('DB_DATABASE', 'sale_db');
 define('DB_PREFIX', '');
